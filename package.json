@@ -59,6 +59,9 @@
       "cordova-plugin-datepicker": {},
       "phonegap-plugin-barcodescanner": {},
       "cordova-sqlite-storage": {}
-    }
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }
