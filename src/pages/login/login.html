@@ -17,22 +17,22 @@
   <ion-row class="logo-row">
     <ion-col></ion-col>
     <ion-col width-67>
-      <img src="http://placehold.it/300x200"/>
+      <img src="../assets/images/iti.png"/>
     </ion-col>
     <ion-col></ion-col>
   </ion-row>
-  <div class="login-box">
+  <!--<div class="login-box">-->
     <form (ngSubmit)="login()" #registerForm="ngForm">
       <ion-row>
         <ion-col>
           <ion-list inset>
             
             <ion-item>
-              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+              <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="registerCredentials._username" required></ion-input>
             </ion-item>
             
             <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials._password" required></ion-input>
             </ion-item>
             
           </ion-list>
@@ -46,5 +46,5 @@
       </ion-row>
       
     </form>
-  </div>
+  <!--</div>-->
 </ion-content>
