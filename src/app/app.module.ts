@@ -21,7 +21,7 @@ const cloudSettings: CloudSettings = {
     'app_id': '346224e3'
   },
   'push': {
-    'sender_id': '',
+    'sender_id': '679390941812',
     'pluginConfig': {
       'android': {
         'iconColor': '#343434'
