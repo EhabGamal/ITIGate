@@ -4,13 +4,17 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 
+//pages
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { Login } from '../pages/login/login';
+import { Permission } from '../pages/permission/permission';
 
-
+//services
 import { AuthService } from '../providers/auth-service';
+import { GlobalService } from '../providers/global-service';
+import { PermissionService } from '../providers/permission-service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,7 +39,8 @@ const cloudSettings: CloudSettings = {
     MyApp,
     HomePage,
     ListPage,
-    Login
+    Login,
+    Permission,
   ],
   imports: [
     BrowserModule,
@@ -49,13 +54,16 @@ const cloudSettings: CloudSettings = {
     MyApp,
     HomePage,
     ListPage,
-    Login
+    Login,
+    Permission,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GlobalService,
     AuthService,
+    PermissionService,
   ]
 })
 export class AppModule {}

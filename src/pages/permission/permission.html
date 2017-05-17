@@ -1,0 +1,34 @@
+<!--
+  Generated template for the Permission page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar inverse>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>permission</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="sendPermission()" #permissionForm="ngForm">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-item text-center>
+              <label>{{date | date:'EEE, MMM d, y'}}</label>
+              <button type="button" ion-button block (click)="pick_date()" >Choose date</button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="button-col">
+        <button ion-button class="submit-btn" full type="submit">Request Permission</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

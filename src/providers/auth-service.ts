@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import {Storage} from "@ionic/storage";
+import {GlobalService} from './global-service';
 import 'rxjs/add/operator/map';
 
 /*
@@ -22,7 +23,7 @@ export class User {
 
 @Injectable()
 export class AuthService {
-  constructor(private http: Http, private storage: Storage) {
+  constructor(private http: Http, private globService: GlobalService, private storage: Storage) {
   }
   currentUser: User;
   access = false;
@@ -36,7 +37,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/json' );
         let options = new RequestOptions({ headers: headers });
         
-        this.http.post("http://localhost:8000/api/login_check", credentials, options)
+        this.http.post(this.globService.ApiUrl+"api/login_check", credentials, options)
           .subscribe(data => {
             if(data.status === 200) {
               this.access = true;
@@ -45,7 +46,8 @@ export class AuthService {
               this.storage.set('user', this.currentUser);
             }
           }, error => {
-            console.log(error);
+            observer.next(this.access);
+            observer.complete();
           },() =>{
             observer.next(this.access);
             observer.complete();
