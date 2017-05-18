@@ -12,12 +12,14 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 export class User {
+  id;
   username: string;
   email: string;
  
-  constructor(name: string, email: string) {
-    this.username = name;
-    this.email = email;
+  constructor(user) {
+    this.id = user.id;
+    this.username = user.username;
+    this.email = user.email;
   }
 }
 
@@ -41,21 +43,36 @@ export class AuthService {
           .subscribe(data => {
             if(data.status === 200) {
               this.access = true;
-              this.currentUser = new User(credentials._username, credentials._username);
-              this.storage.set('token', JSON.parse(data['_body'])['token']);
-              this.storage.set('user', this.currentUser);
+              this.globService.token = JSON.parse(data['_body'])['token'];
+              this.storage.set('token', this.globService.token);
             }
           }, error => {
             observer.next(this.access);
             observer.complete();
           },() =>{
+            this.saveUser();
             observer.next(this.access);
             observer.complete();
           });
       });
     }
   }
- 
+  private saveUser() {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    headers.append('Authorization', 'Bearer '+this.globService.token);
+    console.log(headers);
+    let options = new RequestOptions({ headers: headers });
+    this.http.get(this.globService.ApiUrl+"api/users/me", options)
+    .subscribe(data => {
+      this.currentUser = new User(JSON.parse(data['_body']).user);
+      this.globService.user = this.currentUser;
+      this.storage.set('user', this.currentUser);
+    },error => {
+
+    });
+
+  }
   public getUserInfo() : User {
     return this.currentUser;
   }
