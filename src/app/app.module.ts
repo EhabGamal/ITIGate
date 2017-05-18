@@ -16,6 +16,7 @@ import { Qrcode } from '../pages/qrcode/qrcode';
 import { AuthService } from '../providers/auth-service';
 import { GlobalService } from '../providers/global-service';
 import { PermissionService } from '../providers/permission-service';
+import { QrService } from '../providers/qr-service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -67,6 +68,7 @@ const cloudSettings: CloudSettings = {
     GlobalService,
     AuthService,
     PermissionService,
+    QrService,
   ]
 })
 export class AppModule {}
