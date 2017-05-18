@@ -16,6 +16,10 @@ export class PermissionService {
   }
 
   public sendPermission(date){
+    let data = {
+      user: '1',
+      date: date.getDate().toString()+'-'+(date.getMonth()+1).toString()+'-'+date.getFullYear().toString()
+    }
     if (date === null) {
       return Observable.throw("Please choose date");
     } else {
@@ -23,13 +27,12 @@ export class PermissionService {
         let allowed = false;
         var headers = new Headers();
         headers.append('Content-Type', 'application/json' );
-        headers.append('Authorization', 'Bearer '+this.globService.token );
+        headers.append('Authorization', 'Bearer '+this.globService.token.__zone_symbol__value);
         let options = new RequestOptions({ headers: headers });
-        this.http.post(this.globService.ApiUrl+"", date, options)
+        this.http.post(this.globService.ApiUrl+"api/permissions/", data, options)
           .subscribe(data => {
-            if(data.status === 200) {
-              allowed = true
-            }
+            console.log(data);
+            allowed = true
           }, error => {
             allowed = false
             observer.next(allowed);
