@@ -14,6 +14,16 @@
 
 
 <ion-content padding>
-<img src="assets/images/qr_code.png" alt="">
-<button ion-button block secondary (click)="scanBarcode()">Scan</button>
+<ion-grid>
+    <ion-row>
+        <ion-col>
+           <img src="assets/images/qr_code.png" alt=""> 
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <button ion-button block secondary (click)="scanBarcode()">Scan</button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
 </ion-content>
