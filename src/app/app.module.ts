@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { Login } from '../pages/login/login';
 import { Permission } from '../pages/permission/permission';
+import { Qrcode } from '../pages/qrcode/qrcode';
 
 //services
 import { AuthService } from '../providers/auth-service';
@@ -41,6 +42,7 @@ const cloudSettings: CloudSettings = {
     ListPage,
     Login,
     Permission,
+    Qrcode,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,7 @@ const cloudSettings: CloudSettings = {
     ListPage,
     Login,
     Permission,
+    Qrcode,
   ],
   providers: [
     StatusBar,
