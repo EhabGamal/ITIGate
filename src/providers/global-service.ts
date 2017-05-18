@@ -11,10 +11,11 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class GlobalService {
-  ApiUrl = 'http://localhost:8000/';
+  ApiUrl = 'https://symfonict.herokuapp.com/';
   token: any;
+  user: any;
   constructor(public http: Http, private storage: Storage) {
-    this.token = this.storage.get('token');
+    this.token = this.storage.get('token')['__zone_symbol__value'];
   }
 
 }
