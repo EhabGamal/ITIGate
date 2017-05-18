@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AuthService } from '../../providers/auth-service';
 import { Login } from '../login/login';
+
+import { Chart } from 'chart.js';
 
 
 @Component({
@@ -13,10 +15,13 @@ import { Login } from '../login/login';
 export class HomePage {
   username = '';
   email = '';
+  @ViewChild('doughnutCanvas') doughnutCanvas;
+  doughnutChart: any;
 
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
     private auth: AuthService,
     private scanner: BarcodeScanner
   ) {
@@ -27,6 +32,10 @@ export class HomePage {
       this.username = info['name'];
       this.email = info['email'];
     }
+  }
+  
+  ngAfterViewInit(){
+    this.drawChart();
   }
 
   public logout() {
@@ -65,6 +74,35 @@ export class HomePage {
         alert(err);
       }
     );
+  }
+
+  showAlert(){
+    this.alertCtrl.create({
+      title:'Low Battery',
+      subTitle:'15% of battery remaining',
+      buttons:['Dismiss']
+    }).present();
+  }
+  
+  drawChart(){
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+      type: 'doughnut',
+      data: {
+        labels: ["Red", "Blue"],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19],
+          backgroundColor: [
+            '#FF6384',
+            '#36A2EB'
+          ],
+          hoverBackgroundColor: [
+            "#FF6384",
+            "#36A2EB"
+          ]
+        }]
+      }
+    });
   }
 
 }
