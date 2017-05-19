@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { Login } from '../pages/login/login';
 import { Qrcode } from '../pages/qrcode/qrcode';
 import { Permission } from '../pages/permission/permission';
@@ -17,17 +16,16 @@ export class MyApp {
 
   rootPage: any = Login;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, icon: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Qrcode', component: Qrcode },
-      { title: 'Permission', component: Permission }
+      { title: 'Home', icon: 'home', component: HomePage },
+      { title: 'Qrcode', icon: 'qr-scanner', component: Qrcode },
+      { title: 'Permission', icon: 'home', component: Permission }
     ];
 
   }

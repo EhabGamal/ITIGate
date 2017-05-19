@@ -7,7 +7,6 @@ import { IonicStorageModule } from '@ionic/storage';
 //pages
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { Login } from '../pages/login/login';
 import { Permission } from '../pages/permission/permission';
 import { Qrcode } from '../pages/qrcode/qrcode';
@@ -40,7 +39,6 @@ const cloudSettings: CloudSettings = {
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     Login,
     Permission,
     Qrcode,
@@ -56,7 +54,6 @@ const cloudSettings: CloudSettings = {
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     Login,
     Permission,
     Qrcode,
