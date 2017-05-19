@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading, NavParams } from 'ionic-angular';
+import { NavController, MenuController, AlertController, LoadingController, Loading, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { HomePage } from '../home/home';
 
@@ -12,13 +12,25 @@ import { HomePage } from '../home/home';
 export class Login {
   loading: Loading;
   registerCredentials = { _username: '', _password: '' };
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+  constructor(
+    public navCtrl: NavController,
+    public menu: MenuController,
+    public navParams: NavParams, 
+    private auth: AuthService, 
+    private alertCtrl: AlertController, 
+    private loadingCtrl: LoadingController
+    ) {
+  }
+
+  ionViewDidEnter(){
+    this.menu.enable(false,'sideMenu');
   }
 
   public login() {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
-      if (allowed) {        
+      if (allowed) {
+        this.menu.enable(true, 'sideMenu');
         this.navCtrl.setRoot(HomePage);
       } else {
         this.showError("Access Denied");
