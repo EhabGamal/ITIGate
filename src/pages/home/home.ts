@@ -88,9 +88,9 @@ export class HomePage {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: ["Red", "Blue"],
+        labels: ["Deducted", "Remaining"],
         datasets: [{
-          label: '# of Votes',
+          label: '# of marks',
           data: [12, 19],
           backgroundColor: [
             '#FF6384',
