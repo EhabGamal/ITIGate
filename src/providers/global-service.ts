@@ -13,7 +13,9 @@ import 'rxjs/add/operator/map';
 export class GlobalService {
   ApiUrl = 'https://symfonict.herokuapp.com/';
   token: any;
-  user: any;
+  user: any = {
+    marks:{}
+  };
   constructor(public http: Http, private storage: Storage) {
     this.token = this.storage.get('token')['__zone_symbol__value'];
   }

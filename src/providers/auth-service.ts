@@ -15,11 +15,15 @@ export class User {
   id;
   username: string;
   email: string;
+  track: string;
+  permissions: Array<any>;
  
   constructor(user) {
     this.id = user.id;
     this.username = user.username;
     this.email = user.email;
+    this.track = user.track;
+    this.permissions = user.permissions;
   }
 }
 
@@ -61,17 +65,29 @@ export class AuthService {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json' );
     headers.append('Authorization', 'Bearer '+this.globService.token);
-    console.log(headers);
     let options = new RequestOptions({ headers: headers });
     this.http.get(this.globService.ApiUrl+"api/users/me", options)
     .subscribe(data => {
       this.currentUser = new User(JSON.parse(data['_body']).user);
       this.globService.user = this.currentUser;
       this.storage.set('user', this.currentUser);
+      this.loadUserMarks();
     },error => {
 
     });
 
+  }
+  private loadUserMarks(){
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    headers.append('Authorization', 'Bearer '+this.globService.token);
+    let options = new RequestOptions({ headers: headers });
+    this.http.get(this.globService.ApiUrl+"api/users/"+this.globService.user.id+"/marks", options)
+    .subscribe(data => {
+      this.globService.user.marks = JSON.parse(data['_body']).data;
+    },error => {
+
+    });
   }
   public getUserInfo() : User {
     return this.currentUser;

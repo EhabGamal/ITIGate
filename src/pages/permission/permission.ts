@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading, } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController, Loading, } from 'ionic-angular';
 import { DatePicker } from '@ionic-native/date-picker';
+import { GlobalService } from '../../providers/global-service';
 import { PermissionService } from '../../providers/permission-service';
 import { HomePage } from '../home/home';
 
@@ -10,7 +11,6 @@ import { HomePage } from '../home/home';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   selector: 'page-permission',
   templateUrl: 'permission.html',
@@ -19,11 +19,21 @@ import { HomePage } from '../home/home';
 export class Permission {
   date = new Date();
   loading: Loading;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private perm: PermissionService, private datePicker: DatePicker,  private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+  permissions: Array<any>;
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private global: GlobalService, 
+    private perm: PermissionService, 
+    private datePicker: DatePicker, 
+    private alertCtrl: AlertController, 
+    private loadingCtrl: LoadingController
+    ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Permission');
+    this.permissions = this.global.user.permissions;
   }
 
   showLoading() {

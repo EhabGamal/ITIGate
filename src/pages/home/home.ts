@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { GlobalService } from '../../providers/global-service';
 import { AuthService } from '../../providers/auth-service';
 import { Login } from '../login/login';
 
@@ -15,6 +16,10 @@ import { Chart } from 'chart.js';
 export class HomePage {
   username = '';
   email = '';
+  marks = {
+    total: 20,
+    fullmark: 80
+  }
   @ViewChild('doughnutCanvas') doughnutCanvas;
   doughnutChart: any;
 
@@ -23,6 +28,7 @@ export class HomePage {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     private auth: AuthService,
+    private global: GlobalService,
     private scanner: BarcodeScanner
   ) {
     let info = this.auth.getUserInfo();
@@ -35,7 +41,9 @@ export class HomePage {
   }
   
   ngAfterViewInit(){
+    console.log(this.global.user);
     this.drawChart();
+    this.marks = this.global.user.marks;
   }
 
   public logout() {
@@ -91,7 +99,7 @@ export class HomePage {
         labels: ["Deducted", "Remaining"],
         datasets: [{
           label: '# of marks',
-          data: [12, 19],
+          data: [this.marks.total, this.marks.fullmark],
           backgroundColor: [
             '#FF6384',
             '#36A2EB'

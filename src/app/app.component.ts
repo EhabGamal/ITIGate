@@ -25,7 +25,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', icon: 'home', component: HomePage },
       { title: 'Qrcode', icon: 'qr-scanner', component: Qrcode },
-      { title: 'Permission', icon: 'home', component: Permission }
+      { title: 'Permission', icon: 'key', component: Permission }
     ];
 
   }
